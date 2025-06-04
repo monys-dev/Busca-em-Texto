@@ -36,5 +36,30 @@ namespace BuscaTexto {
         private void sairToolStripMenuItem_Click(object sender, EventArgs e) {
             Application.Exit();
         }
+
+        private void pesquisarToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void boyerMooreToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void forçaBrutaToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void kMPToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void rabinKarpToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
