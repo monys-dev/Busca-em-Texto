@@ -28,7 +28,7 @@ namespace BuscaTexto {
 
         // [F]
         private void abrirToolStripMenuItem_Click(object sender, EventArgs e) {
-            // TODO
+            // Testando mudanças
             // Caixa de diálogo de abrir arquivo com filtro para extensão txt e rtf edição 
         }
         // [F]
