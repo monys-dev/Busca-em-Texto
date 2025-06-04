@@ -22,7 +22,7 @@ namespace BuscaTexto {
             // TODO
             // Complete com seu nome e código de matrícula
             MessageBox.Show(this,
-               "Busca em Texto - 2025/1\n\nDesenvolvido por:\n79999999 - NOME DO ALUNO\nProf. Virgílio Borges de Oliveira\n\nAlgoritmos e Estruturas de Dados II\nFaculdade COTEMIG\nSomente para fins didáticos.",
+               "Busca em Texto - 2025/1\n\nDesenvolvido por:\n72301104 - Ramonys Santos\n72301201 - Felipe Vandevelde\n\nProf. Virgílio Borges de Oliveira\n\nAlgoritmos e Estruturas de Dados II\nFaculdade COTEMIG\nSomente para fins didáticos.",
                "Sobre o trabalho...",
                MessageBoxButtons.OK,
                MessageBoxIcon.Information);
