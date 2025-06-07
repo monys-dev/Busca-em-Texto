@@ -157,6 +157,8 @@ namespace BuscaTexto {
             // 
             // btnForcaBruta
             // 
+            this.btnForcaBruta.Checked = false;
+            this.btnForcaBruta.CheckState = System.Windows.Forms.CheckState.Unchecked;
             this.btnForcaBruta.Name = "btnForcaBruta";
             this.btnForcaBruta.Size = new System.Drawing.Size(224, 26);
             this.btnForcaBruta.Text = "Força Bruta";
@@ -164,6 +166,8 @@ namespace BuscaTexto {
             // 
             // btnKMP
             // 
+            this.btnKMP.Checked = false;
+            this.btnKMP.CheckState = System.Windows.Forms.CheckState.Unchecked;
             this.btnKMP.Name = "btnKMP";
             this.btnKMP.Size = new System.Drawing.Size(224, 26);
             this.btnKMP.Text = "KMP";
@@ -171,6 +175,8 @@ namespace BuscaTexto {
             // 
             // btnRabinKarp
             // 
+            this.btnRabinKarp.Checked = false;
+            this.btnRabinKarp.CheckState = System.Windows.Forms.CheckState.Unchecked;
             this.btnRabinKarp.Name = "btnRabinKarp";
             this.btnRabinKarp.Size = new System.Drawing.Size(224, 26);
             this.btnRabinKarp.Text = "Rabin Karp";
