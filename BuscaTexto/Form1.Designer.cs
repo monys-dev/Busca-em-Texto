@@ -1,4 +1,6 @@
-﻿namespace BuscaTexto {
+﻿using System.Windows.Forms;
+
+namespace BuscaTexto {
     partial class Form1 {
         /// <summary>
         /// Required designer variable.
@@ -23,96 +25,103 @@
         /// the contents of this method with the code editor.
         /// </summary>
         private void InitializeComponent() {
-            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
-            this.arquivoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.novoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.abrirToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.menu = new System.Windows.Forms.MenuStrip();
+            this.btnArquivo = new System.Windows.Forms.ToolStripMenuItem();
+            this.btnNovo = new System.Windows.Forms.ToolStripMenuItem();
+            this.btnAbrir = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripSeparator();
-            this.sairToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.pesquisarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.ajudaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.sobreToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.btnSair = new System.Windows.Forms.ToolStripMenuItem();
+            this.btnPesquisar = new System.Windows.Forms.ToolStripMenuItem();
+            this.btnAjuda = new System.Windows.Forms.ToolStripMenuItem();
+            this.btnSobre = new System.Windows.Forms.ToolStripMenuItem();
             this.texto = new System.Windows.Forms.RichTextBox();
-            this.metódoDePesquisaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.boyerMooreToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.forçaBrutaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.kMPToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.rabinKarpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuStrip1.SuspendLayout();
+            this.btMtdPesquisa = new System.Windows.Forms.ToolStripMenuItem();
+            this.btnBoyerMoore = new System.Windows.Forms.ToolStripMenuItem();
+            this.btnForcaBruta = new System.Windows.Forms.ToolStripMenuItem();
+            this.btnKMP = new System.Windows.Forms.ToolStripMenuItem();
+            this.btnRabinKarp = new System.Windows.Forms.ToolStripMenuItem();
+            this.OPFile = new System.Windows.Forms.OpenFileDialog();
+            this.SVFile = new System.Windows.Forms.SaveFileDialog();
+            this.menu.SuspendLayout();
             this.SuspendLayout();
             // 
-            // menuStrip1
+            // menu
             // 
-            this.menuStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
-            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.ajudaToolStripMenuItem,
-            this.arquivoToolStripMenuItem,
-            this.pesquisarToolStripMenuItem,
-            this.metódoDePesquisaToolStripMenuItem});
-            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
-            this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(756, 28);
-            this.menuStrip1.TabIndex = 0;
-            this.menuStrip1.Text = "menuStrip1";
+            this.menu.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.menu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.btnAjuda,
+            this.btnArquivo,
+            this.btnPesquisar,
+            this.btMtdPesquisa});
+            this.menu.Location = new System.Drawing.Point(0, 0);
+            this.menu.Name = "menu";
+            this.menu.Size = new System.Drawing.Size(756, 28);
+            this.menu.TabIndex = 0;
+            this.menu.Text = "menu";
             // 
-            // arquivoToolStripMenuItem
+            // btnArquivo
             // 
-            this.arquivoToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.novoToolStripMenuItem,
-            this.abrirToolStripMenuItem,
+            this.btnArquivo.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.btnNovo,
+            this.btnAbrir,
             this.toolStripMenuItem1,
-            this.sairToolStripMenuItem});
-            this.arquivoToolStripMenuItem.Name = "arquivoToolStripMenuItem";
-            this.arquivoToolStripMenuItem.Size = new System.Drawing.Size(75, 26);
-            this.arquivoToolStripMenuItem.Text = "&Arquivo";
+            this.btnSair});
+            this.btnArquivo.Name = "btnArquivo";
+            this.btnArquivo.Size = new System.Drawing.Size(75, 26);
+            this.btnArquivo.Text = "&Arquivo";
             // 
-            // novoToolStripMenuItem
+            // btnNovo
             // 
-            this.novoToolStripMenuItem.Name = "novoToolStripMenuItem";
-            this.novoToolStripMenuItem.Size = new System.Drawing.Size(128, 26);
-            this.novoToolStripMenuItem.Text = "&Novo";
-            this.novoToolStripMenuItem.Click += new System.EventHandler(this.novoToolStripMenuItem_Click);
+            this.btnNovo.Name = "btnNovo";
+            this.btnNovo.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.N)));
+            this.btnNovo.Size = new System.Drawing.Size(128, 26);
+            this.btnNovo.Text = "&Novo";
+            this.btnNovo.Click += new System.EventHandler(this.clickNovo);
             // 
-            // abrirToolStripMenuItem
+            // btnAbrir
             // 
-            this.abrirToolStripMenuItem.Name = "abrirToolStripMenuItem";
-            this.abrirToolStripMenuItem.Size = new System.Drawing.Size(128, 26);
-            this.abrirToolStripMenuItem.Text = "A&brir";
-            this.abrirToolStripMenuItem.Click += new System.EventHandler(this.abrirToolStripMenuItem_Click);
+            this.btnAbrir.Name = "btnAbrir";
+            this.btnAbrir.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.O)));
+            this.btnAbrir.Size = new System.Drawing.Size(128, 26);
+            this.btnAbrir.Text = "A&brir";
+            this.btnAbrir.Click += new System.EventHandler(this.clickAbrir);
             // 
             // toolStripMenuItem1
             // 
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
             this.toolStripMenuItem1.Size = new System.Drawing.Size(125, 6);
             // 
-            // sairToolStripMenuItem
+            // btnSair
             // 
-            this.sairToolStripMenuItem.Name = "sairToolStripMenuItem";
-            this.sairToolStripMenuItem.Size = new System.Drawing.Size(128, 26);
-            this.sairToolStripMenuItem.Text = "&Sair";
-            this.sairToolStripMenuItem.Click += new System.EventHandler(this.sairToolStripMenuItem_Click);
+            this.btnSair.Name = "btnSair";
+            this.btnSair.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.W)));
+            this.btnSair.Size = new System.Drawing.Size(128, 26);
+            this.btnSair.Text = "&Sair";
+            this.btnSair.Click += new System.EventHandler(this.clickSair);
             // 
-            // pesquisarToolStripMenuItem
+            // btnPesquisar
             // 
-            this.pesquisarToolStripMenuItem.Name = "pesquisarToolStripMenuItem";
-            this.pesquisarToolStripMenuItem.Size = new System.Drawing.Size(84, 24);
-            this.pesquisarToolStripMenuItem.Text = "Pesquisar";
-            this.pesquisarToolStripMenuItem.Click += new System.EventHandler(this.pesquisarToolStripMenuItem_Click);
+            this.btnPesquisar.Name = "btnPesquisar";
+            this.btnPesquisar.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.F)));
+            this.btnPesquisar.Size = new System.Drawing.Size(84, 24);
+            this.btnPesquisar.Text = "Pesquisar";
+            this.btnPesquisar.Click += new System.EventHandler(this.clickPesquisar);
             // 
-            // ajudaToolStripMenuItem
+            // btnAjuda
             // 
-            this.ajudaToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.sobreToolStripMenuItem});
-            this.ajudaToolStripMenuItem.Name = "ajudaToolStripMenuItem";
-            this.ajudaToolStripMenuItem.Size = new System.Drawing.Size(62, 26);
-            this.ajudaToolStripMenuItem.Text = "A&juda";
+            this.btnAjuda.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.btnSobre});
+            this.btnAjuda.Name = "btnAjuda";
+            this.btnAjuda.Size = new System.Drawing.Size(62, 26);
+            this.btnAjuda.Text = "A&juda";
             // 
-            // sobreToolStripMenuItem
+            // btnSobre
             // 
-            this.sobreToolStripMenuItem.Name = "sobreToolStripMenuItem";
-            this.sobreToolStripMenuItem.Size = new System.Drawing.Size(140, 26);
-            this.sobreToolStripMenuItem.Text = "S&obre...";
-            this.sobreToolStripMenuItem.Click += new System.EventHandler(this.sobreToolStripMenuItem_Click);
+            this.btnSobre.Name = "btnSobre";
+            this.btnSobre.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.I)));
+            this.btnSobre.Size = new System.Drawing.Size(140, 26);
+            this.btnSobre.Text = "S&obre...";
+            this.btnSobre.Click += new System.EventHandler(this.clickSobre);
             // 
             // texto
             // 
@@ -126,44 +135,46 @@
             this.texto.TabIndex = 1;
             this.texto.Text = "";
             // 
-            // metódoDePesquisaToolStripMenuItem
+            // btMtdPesquisa
             // 
-            this.metódoDePesquisaToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.boyerMooreToolStripMenuItem,
-            this.forçaBrutaToolStripMenuItem,
-            this.kMPToolStripMenuItem,
-            this.rabinKarpToolStripMenuItem});
-            this.metódoDePesquisaToolStripMenuItem.Name = "metódoDePesquisaToolStripMenuItem";
-            this.metódoDePesquisaToolStripMenuItem.Size = new System.Drawing.Size(157, 24);
-            this.metódoDePesquisaToolStripMenuItem.Text = "&Método de Pesquisa";
+            this.btMtdPesquisa.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.btnBoyerMoore,
+            this.btnForcaBruta,
+            this.btnKMP,
+            this.btnRabinKarp});
+            this.btMtdPesquisa.Name = "btMtdPesquisa";
+            this.btMtdPesquisa.Size = new System.Drawing.Size(157, 24);
+            this.btMtdPesquisa.Text = "&Método de Pesquisa";
             // 
-            // boyerMooreToolStripMenuItem
+            // btnBoyerMoore
             // 
-            this.boyerMooreToolStripMenuItem.Name = "boyerMooreToolStripMenuItem";
-            this.boyerMooreToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
-            this.boyerMooreToolStripMenuItem.Text = "Boyer Moore";
-            this.boyerMooreToolStripMenuItem.Click += new System.EventHandler(this.boyerMooreToolStripMenuItem_Click);
+            this.btnBoyerMoore.Checked = true;
+            this.btnBoyerMoore.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.btnBoyerMoore.Name = "btnBoyerMoore";
+            this.btnBoyerMoore.Size = new System.Drawing.Size(224, 26);
+            this.btnBoyerMoore.Text = "Boyer Moore";
+            this.btnBoyerMoore.Click += new System.EventHandler(this.clickBoyerMoore);
             // 
-            // forçaBrutaToolStripMenuItem
+            // btnForcaBruta
             // 
-            this.forçaBrutaToolStripMenuItem.Name = "forçaBrutaToolStripMenuItem";
-            this.forçaBrutaToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
-            this.forçaBrutaToolStripMenuItem.Text = "Força Bruta";
-            this.forçaBrutaToolStripMenuItem.Click += new System.EventHandler(this.forçaBrutaToolStripMenuItem_Click);
+            this.btnForcaBruta.Name = "btnForcaBruta";
+            this.btnForcaBruta.Size = new System.Drawing.Size(224, 26);
+            this.btnForcaBruta.Text = "Força Bruta";
+            this.btnForcaBruta.Click += new System.EventHandler(this.clickForcaBruta);
             // 
-            // kMPToolStripMenuItem
+            // btnKMP
             // 
-            this.kMPToolStripMenuItem.Name = "kMPToolStripMenuItem";
-            this.kMPToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
-            this.kMPToolStripMenuItem.Text = "KMP";
-            this.kMPToolStripMenuItem.Click += new System.EventHandler(this.kMPToolStripMenuItem_Click);
+            this.btnKMP.Name = "btnKMP";
+            this.btnKMP.Size = new System.Drawing.Size(224, 26);
+            this.btnKMP.Text = "KMP";
+            this.btnKMP.Click += new System.EventHandler(this.clickKMP);
             // 
-            // rabinKarpToolStripMenuItem
+            // btnRabinKarp
             // 
-            this.rabinKarpToolStripMenuItem.Name = "rabinKarpToolStripMenuItem";
-            this.rabinKarpToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
-            this.rabinKarpToolStripMenuItem.Text = "Rabin Karp";
-            this.rabinKarpToolStripMenuItem.Click += new System.EventHandler(this.rabinKarpToolStripMenuItem_Click);
+            this.btnRabinKarp.Name = "btnRabinKarp";
+            this.btnRabinKarp.Size = new System.Drawing.Size(224, 26);
+            this.btnRabinKarp.Text = "Rabin Karp";
+            this.btnRabinKarp.Click += new System.EventHandler(this.clickRabinKarp);
             // 
             // Form1
             // 
@@ -171,14 +182,14 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(756, 559);
             this.Controls.Add(this.texto);
-            this.Controls.Add(this.menuStrip1);
-            this.MainMenuStrip = this.menuStrip1;
+            this.Controls.Add(this.menu);
+            this.MainMenuStrip = this.menu;
             this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "Form1";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Trabalho Prático - Busca em Texto 2025.1";
-            this.menuStrip1.ResumeLayout(false);
-            this.menuStrip1.PerformLayout();
+            this.menu.ResumeLayout(false);
+            this.menu.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -186,21 +197,23 @@
 
         #endregion
 
-        private System.Windows.Forms.MenuStrip menuStrip1;
-        private System.Windows.Forms.ToolStripMenuItem arquivoToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem novoToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem abrirToolStripMenuItem;
+        private System.Windows.Forms.MenuStrip menu;
+        private System.Windows.Forms.ToolStripMenuItem btnArquivo;
+        private System.Windows.Forms.ToolStripMenuItem btnNovo;
+        private System.Windows.Forms.ToolStripMenuItem btnAbrir;
         private System.Windows.Forms.ToolStripSeparator toolStripMenuItem1;
-        private System.Windows.Forms.ToolStripMenuItem sairToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem pesquisarToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem btnSair;
+        private System.Windows.Forms.ToolStripMenuItem btnPesquisar;
         private System.Windows.Forms.RichTextBox texto;
-        private System.Windows.Forms.ToolStripMenuItem ajudaToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem sobreToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem metódoDePesquisaToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem boyerMooreToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem forçaBrutaToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem kMPToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem rabinKarpToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem btnAjuda;
+        private System.Windows.Forms.ToolStripMenuItem btnSobre;
+        private System.Windows.Forms.ToolStripMenuItem btMtdPesquisa;
+        private System.Windows.Forms.ToolStripMenuItem btnBoyerMoore;
+        private System.Windows.Forms.ToolStripMenuItem btnForcaBruta;
+        private System.Windows.Forms.ToolStripMenuItem btnKMP;
+        private System.Windows.Forms.ToolStripMenuItem btnRabinKarp;
+        private System.Windows.Forms.OpenFileDialog OPFile;
+        private SaveFileDialog SVFile;
     }
 }
 
