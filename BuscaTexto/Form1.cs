@@ -70,15 +70,16 @@ namespace BuscaTexto {
         // [R]
 
         // [F]
-        private String digitarTextoPesquisado()
+        private void digitarTextoPesquisado()
         {
-            string input = .InputBox("Digite um peso maior ou igual a zero", "Editar peso", null);
+            
+           /* string input = .InputBox("Digite um peso maior ou igual a zero", "Editar peso", null);
             if (input == "")
             {
                 return "";
             } else {
                 return "";
-            }
+            }*/
         }
         // [F]
 
