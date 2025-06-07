@@ -1,4 +1,6 @@
-﻿namespace BuscaTexto {
+﻿using System.Windows.Forms;
+
+namespace BuscaTexto {
     partial class Form1 {
         /// <summary>
         /// Required designer variable.
@@ -38,6 +40,8 @@
             this.btnForcaBruta = new System.Windows.Forms.ToolStripMenuItem();
             this.btnKMP = new System.Windows.Forms.ToolStripMenuItem();
             this.btnRabinKarp = new System.Windows.Forms.ToolStripMenuItem();
+            this.OPFile = new System.Windows.Forms.OpenFileDialog();
+            this.SVFile = new System.Windows.Forms.SaveFileDialog();
             this.menu.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -69,6 +73,7 @@
             // btnNovo
             // 
             this.btnNovo.Name = "btnNovo";
+            this.btnNovo.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.N)));
             this.btnNovo.Size = new System.Drawing.Size(128, 26);
             this.btnNovo.Text = "&Novo";
             this.btnNovo.Click += new System.EventHandler(this.clickNovo);
@@ -76,6 +81,7 @@
             // btnAbrir
             // 
             this.btnAbrir.Name = "btnAbrir";
+            this.btnAbrir.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.O)));
             this.btnAbrir.Size = new System.Drawing.Size(128, 26);
             this.btnAbrir.Text = "A&brir";
             this.btnAbrir.Click += new System.EventHandler(this.clickAbrir);
@@ -88,6 +94,7 @@
             // btnSair
             // 
             this.btnSair.Name = "btnSair";
+            this.btnSair.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.W)));
             this.btnSair.Size = new System.Drawing.Size(128, 26);
             this.btnSair.Text = "&Sair";
             this.btnSair.Click += new System.EventHandler(this.clickSair);
@@ -95,6 +102,7 @@
             // btnPesquisar
             // 
             this.btnPesquisar.Name = "btnPesquisar";
+            this.btnPesquisar.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.F)));
             this.btnPesquisar.Size = new System.Drawing.Size(84, 24);
             this.btnPesquisar.Text = "Pesquisar";
             this.btnPesquisar.Click += new System.EventHandler(this.clickPesquisar);
@@ -110,6 +118,7 @@
             // btnSobre
             // 
             this.btnSobre.Name = "btnSobre";
+            this.btnSobre.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.I)));
             this.btnSobre.Size = new System.Drawing.Size(140, 26);
             this.btnSobre.Text = "S&obre...";
             this.btnSobre.Click += new System.EventHandler(this.clickSobre);
@@ -139,6 +148,8 @@
             // 
             // btnBoyerMoore
             // 
+            this.btnBoyerMoore.Checked = true;
+            this.btnBoyerMoore.CheckState = System.Windows.Forms.CheckState.Checked;
             this.btnBoyerMoore.Name = "btnBoyerMoore";
             this.btnBoyerMoore.Size = new System.Drawing.Size(224, 26);
             this.btnBoyerMoore.Text = "Boyer Moore";
@@ -201,6 +212,8 @@
         private System.Windows.Forms.ToolStripMenuItem btnForcaBruta;
         private System.Windows.Forms.ToolStripMenuItem btnKMP;
         private System.Windows.Forms.ToolStripMenuItem btnRabinKarp;
+        private System.Windows.Forms.OpenFileDialog OPFile;
+        private SaveFileDialog SVFile;
     }
 }
 

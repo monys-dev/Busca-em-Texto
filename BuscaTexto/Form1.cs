@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Microsoft.VisualBasic;
 
 namespace BuscaTexto {
     public partial class Form1 : Form {
@@ -40,36 +41,97 @@ namespace BuscaTexto {
         // [R]
         private void clickPesquisar(object sender, EventArgs e)
         {
+            String padrao = texto.Text;
+            String textoBusca = texto.Text;
 
+            if (padrao.Length == 0 || textoBusca.Length == 0) {
+                MessageBox.Show(this, "Informe o padrão e o texto a serem pesquisados.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            int posicao = -1;
+
+            if (btnBoyerMoore.Checked) {
+                posicao = BuscaBoyerMoore.BMSearch(padrao, textoBusca);
+            } else if (btnForcaBruta.Checked) {
+                posicao = BuscaForcaBruta.forcaBruta(padrao, textoBusca);
+            } else if (btnKMP.Checked) {
+                posicao = BuscaKMP.KMPSearch(padrao, textoBusca);
+            } else if (btnRabinKarp.Checked) {
+                posicao = BuscaRabinKarp.RKSearch(padrao, textoBusca);
+            }
+
+            if (posicao >= 0) {
+                MessageBox.Show(this, $"Padrão encontrado na posição {posicao}.", "Resultado da busca", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            } else {
+                MessageBox.Show(this, "Padrão não encontrado.", "Resultado da busca", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
         }
         // [R]
 
-        // []
+        // [F]
+        private String digitarTextoPesquisado()
+        {
+            string input = .InputBox("Digite um peso maior ou igual a zero", "Editar peso", null);
+            if (input == "")
+            {
+                return "";
+            } else {
+                return "";
+            }
+        }
+        // [F]
+
+        // [F]
         private void clickBoyerMoore(object sender, EventArgs e)
         {
-
+            if (!btnBoyerMoore.Checked)
+            {
+                btnBoyerMoore.Checked = true;
+                btnForcaBruta.Checked = false;
+                btnKMP.Checked = false;
+                btnRabinKarp.Checked = false;
+            }
         }
-        // []
+        // [F]
 
-        // []
+        // [F]
         private void clickForcaBruta(object sender, EventArgs e)
         {
-
+            if (!btnForcaBruta.Checked)
+            {
+                btnBoyerMoore.Checked = false;
+                btnForcaBruta.Checked = true;
+                btnKMP.Checked = false;
+                btnRabinKarp.Checked = false;
+            }
         }
-        // []
+        // [F]
 
-        // []
+        // [F]
         private void clickKMP(object sender, EventArgs e)
         {
-
+            if (!btnKMP.Checked)
+            {
+                btnBoyerMoore.Checked = false;
+                btnForcaBruta.Checked = false;
+                btnKMP.Checked = true;
+                btnRabinKarp.Checked = false;
+            }
         }
-        // []
+        // [F]
 
-        // []
+        // [F]
         private void clickRabinKarp(object sender, EventArgs e)
         {
-
+            if (!btnRabinKarp.Checked)
+            {
+                btnBoyerMoore.Checked = false;
+                btnForcaBruta.Checked = false;
+                btnKMP.Checked = false;
+                btnRabinKarp.Checked = true;
+            }
         }
-        // []
+        // [F]
     }
 }
