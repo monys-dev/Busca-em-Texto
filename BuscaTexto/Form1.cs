@@ -8,6 +8,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Microsoft.VisualBasic;
+using System.Drawing.Drawing2D;
+using System.IO;
 
 namespace BuscaTexto {
     public partial class Form1 : Form {
@@ -41,33 +43,63 @@ namespace BuscaTexto {
         // [R]
         private void clickPesquisar(object sender, EventArgs e)
         {
-            String padrao = texto.Text;
-            String textoBusca = texto.Text;
+            string textoInformado = texto.Text; // "texto" = RichTextBox do Form1
+            string padrao = texto.SelectedText;
 
-            if (padrao.Length == 0 || textoBusca.Length == 0) {
-                MessageBox.Show(this, "Informe o padrão e o texto a serem pesquisados.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
+            if (string.IsNullOrWhiteSpace(textoInformado))
+            {
+                MessageBox.Show(this, "O texto base está vazio", "Atenção!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            if (string.IsNullOrWhiteSpace(padrao))
+            {
+                padrao = Interaction.InputBox("Digite o texto a ser pesquisado:", "Padrão da pesquisa");
+
+                if (string.IsNullOrWhiteSpace(padrao))
+                    return;
             }
 
-            int posicao = -1;
-
-            if (btnBoyerMoore.Checked) {
-                posicao = BuscaBoyerMoore.BMSearch(padrao, textoBusca);
-            } else if (btnForcaBruta.Checked) {
-                posicao = BuscaForcaBruta.forcaBruta(padrao, textoBusca);
-            } else if (btnKMP.Checked) {
-                posicao = BuscaKMP.KMPSearch(padrao, textoBusca);
-            } else if (btnRabinKarp.Checked) {
-                posicao = BuscaRabinKarp.RKSearch(padrao, textoBusca);
+            if (btnBoyerMoore.Checked)
+            {
+                ExecutarBusca(padrao, textoInformado, BuscaBoyerMoore.BMSearch);
+                
+            }
+            else if (btnForcaBruta.Checked)
+            {
+                posicao = BuscaForcaBruta.forcaBruta(padrao, textoInformado);
+            }
+            else if (btnKMP.Checked)
+            {
+                posicao = BuscaKMP.KMPSearch(padrao, textoInformado);
+            }
+            else {
+                posicao = BuscaRabinKarp.RKSearch(padrao, textoInformado);
             }
 
-            if (posicao >= 0) {
+
+            if (posicao >= 0)
+            {
                 MessageBox.Show(this, $"Padrão encontrado na posição {posicao}.", "Resultado da busca", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            } else {
-                MessageBox.Show(this, "Padrão não encontrado.", "Resultado da busca", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            else {
+                MessageBox.Show(this, "Padrão não encontrado.", "Resultado da busca", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
         // [R]
+
+        private void ExecutarBusca(string padrao, string textoInformado, Func<string, string, int> algoritmoBusca)
+        {
+            //array de numeros
+         // textoInformado.substring(posicao, padrao.Length-posicao);
+         // Precisamos
+
+            int posicao = 0;
+            while(posicao != -1)
+            {
+                posicao = algoritmoBusca(padrao, textoInformado.Substring(posicao, textoInformado.Length - (posicao + padrao.Length)));
+                int a = 1;
+                //pinta as parada
+            }
+        }
 
         // [F]
         private void digitarTextoPesquisado()

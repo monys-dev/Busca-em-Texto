@@ -26,20 +26,20 @@ namespace BuscaTexto {
         /// </summary>
         private void InitializeComponent() {
             this.menu = new System.Windows.Forms.MenuStrip();
+            this.btnAjuda = new System.Windows.Forms.ToolStripMenuItem();
+            this.btnSobre = new System.Windows.Forms.ToolStripMenuItem();
             this.btnArquivo = new System.Windows.Forms.ToolStripMenuItem();
             this.btnNovo = new System.Windows.Forms.ToolStripMenuItem();
             this.btnAbrir = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripSeparator();
             this.btnSair = new System.Windows.Forms.ToolStripMenuItem();
             this.btnPesquisar = new System.Windows.Forms.ToolStripMenuItem();
-            this.btnAjuda = new System.Windows.Forms.ToolStripMenuItem();
-            this.btnSobre = new System.Windows.Forms.ToolStripMenuItem();
-            this.texto = new System.Windows.Forms.RichTextBox();
             this.btMtdPesquisa = new System.Windows.Forms.ToolStripMenuItem();
             this.btnBoyerMoore = new System.Windows.Forms.ToolStripMenuItem();
             this.btnForcaBruta = new System.Windows.Forms.ToolStripMenuItem();
             this.btnKMP = new System.Windows.Forms.ToolStripMenuItem();
             this.btnRabinKarp = new System.Windows.Forms.ToolStripMenuItem();
+            this.texto = new System.Windows.Forms.RichTextBox();
             this.OPFile = new System.Windows.Forms.OpenFileDialog();
             this.SVFile = new System.Windows.Forms.SaveFileDialog();
             this.menu.SuspendLayout();
@@ -59,6 +59,22 @@ namespace BuscaTexto {
             this.menu.TabIndex = 0;
             this.menu.Text = "menu";
             // 
+            // btnAjuda
+            // 
+            this.btnAjuda.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.btnSobre});
+            this.btnAjuda.Name = "btnAjuda";
+            this.btnAjuda.Size = new System.Drawing.Size(62, 24);
+            this.btnAjuda.Text = "A&juda";
+            // 
+            // btnSobre
+            // 
+            this.btnSobre.Name = "btnSobre";
+            this.btnSobre.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.I)));
+            this.btnSobre.Size = new System.Drawing.Size(186, 26);
+            this.btnSobre.Text = "S&obre...";
+            this.btnSobre.Click += new System.EventHandler(this.clickSobre);
+            // 
             // btnArquivo
             // 
             this.btnArquivo.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -67,14 +83,14 @@ namespace BuscaTexto {
             this.toolStripMenuItem1,
             this.btnSair});
             this.btnArquivo.Name = "btnArquivo";
-            this.btnArquivo.Size = new System.Drawing.Size(75, 26);
+            this.btnArquivo.Size = new System.Drawing.Size(75, 24);
             this.btnArquivo.Text = "&Arquivo";
             // 
             // btnNovo
             // 
             this.btnNovo.Name = "btnNovo";
             this.btnNovo.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.N)));
-            this.btnNovo.Size = new System.Drawing.Size(128, 26);
+            this.btnNovo.Size = new System.Drawing.Size(181, 26);
             this.btnNovo.Text = "&Novo";
             this.btnNovo.Click += new System.EventHandler(this.clickNovo);
             // 
@@ -82,20 +98,20 @@ namespace BuscaTexto {
             // 
             this.btnAbrir.Name = "btnAbrir";
             this.btnAbrir.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.O)));
-            this.btnAbrir.Size = new System.Drawing.Size(128, 26);
+            this.btnAbrir.Size = new System.Drawing.Size(181, 26);
             this.btnAbrir.Text = "A&brir";
             this.btnAbrir.Click += new System.EventHandler(this.clickAbrir);
             // 
             // toolStripMenuItem1
             // 
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(125, 6);
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(178, 6);
             // 
             // btnSair
             // 
             this.btnSair.Name = "btnSair";
             this.btnSair.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.W)));
-            this.btnSair.Size = new System.Drawing.Size(128, 26);
+            this.btnSair.Size = new System.Drawing.Size(181, 26);
             this.btnSair.Text = "&Sair";
             this.btnSair.Click += new System.EventHandler(this.clickSair);
             // 
@@ -106,34 +122,6 @@ namespace BuscaTexto {
             this.btnPesquisar.Size = new System.Drawing.Size(84, 24);
             this.btnPesquisar.Text = "Pesquisar";
             this.btnPesquisar.Click += new System.EventHandler(this.clickPesquisar);
-            // 
-            // btnAjuda
-            // 
-            this.btnAjuda.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.btnSobre});
-            this.btnAjuda.Name = "btnAjuda";
-            this.btnAjuda.Size = new System.Drawing.Size(62, 26);
-            this.btnAjuda.Text = "A&juda";
-            // 
-            // btnSobre
-            // 
-            this.btnSobre.Name = "btnSobre";
-            this.btnSobre.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.I)));
-            this.btnSobre.Size = new System.Drawing.Size(140, 26);
-            this.btnSobre.Text = "S&obre...";
-            this.btnSobre.Click += new System.EventHandler(this.clickSobre);
-            // 
-            // texto
-            // 
-            this.texto.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.texto.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.texto.Location = new System.Drawing.Point(0, 28);
-            this.texto.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.texto.Name = "texto";
-            this.texto.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.None;
-            this.texto.Size = new System.Drawing.Size(756, 531);
-            this.texto.TabIndex = 1;
-            this.texto.Text = "";
             // 
             // btMtdPesquisa
             // 
@@ -151,36 +139,42 @@ namespace BuscaTexto {
             this.btnBoyerMoore.Checked = true;
             this.btnBoyerMoore.CheckState = System.Windows.Forms.CheckState.Checked;
             this.btnBoyerMoore.Name = "btnBoyerMoore";
-            this.btnBoyerMoore.Size = new System.Drawing.Size(224, 26);
+            this.btnBoyerMoore.Size = new System.Drawing.Size(178, 26);
             this.btnBoyerMoore.Text = "Boyer Moore";
             this.btnBoyerMoore.Click += new System.EventHandler(this.clickBoyerMoore);
             // 
             // btnForcaBruta
             // 
-            this.btnForcaBruta.Checked = false;
-            this.btnForcaBruta.CheckState = System.Windows.Forms.CheckState.Unchecked;
             this.btnForcaBruta.Name = "btnForcaBruta";
-            this.btnForcaBruta.Size = new System.Drawing.Size(224, 26);
+            this.btnForcaBruta.Size = new System.Drawing.Size(178, 26);
             this.btnForcaBruta.Text = "Força Bruta";
             this.btnForcaBruta.Click += new System.EventHandler(this.clickForcaBruta);
             // 
             // btnKMP
             // 
-            this.btnKMP.Checked = false;
-            this.btnKMP.CheckState = System.Windows.Forms.CheckState.Unchecked;
             this.btnKMP.Name = "btnKMP";
-            this.btnKMP.Size = new System.Drawing.Size(224, 26);
+            this.btnKMP.Size = new System.Drawing.Size(178, 26);
             this.btnKMP.Text = "KMP";
             this.btnKMP.Click += new System.EventHandler(this.clickKMP);
             // 
             // btnRabinKarp
             // 
-            this.btnRabinKarp.Checked = false;
-            this.btnRabinKarp.CheckState = System.Windows.Forms.CheckState.Unchecked;
             this.btnRabinKarp.Name = "btnRabinKarp";
-            this.btnRabinKarp.Size = new System.Drawing.Size(224, 26);
+            this.btnRabinKarp.Size = new System.Drawing.Size(178, 26);
             this.btnRabinKarp.Text = "Rabin Karp";
             this.btnRabinKarp.Click += new System.EventHandler(this.clickRabinKarp);
+            // 
+            // texto
+            // 
+            this.texto.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.texto.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.texto.Location = new System.Drawing.Point(0, 28);
+            this.texto.Margin = new System.Windows.Forms.Padding(4);
+            this.texto.Name = "texto";
+            this.texto.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.None;
+            this.texto.Size = new System.Drawing.Size(756, 531);
+            this.texto.TabIndex = 1;
+            this.texto.Text = "";
             // 
             // Form1
             // 
@@ -190,7 +184,7 @@ namespace BuscaTexto {
             this.Controls.Add(this.texto);
             this.Controls.Add(this.menu);
             this.MainMenuStrip = this.menu;
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "Form1";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Trabalho Prático - Busca em Texto 2025.1";
