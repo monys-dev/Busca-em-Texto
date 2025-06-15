@@ -65,55 +65,41 @@ namespace BuscaTexto {
             }
             else if (btnForcaBruta.Checked)
             {
-                posicao = BuscaForcaBruta.forcaBruta(padrao, textoInformado);
+                ExecutarBusca(padrao, textoInformado, BuscaForcaBruta.forcaBruta);
             }
             else if (btnKMP.Checked)
             {
-                posicao = BuscaKMP.KMPSearch(padrao, textoInformado);
+                ExecutarBusca(padrao, textoInformado, BuscaKMP.KMPSearch);
             }
-            else {
-                posicao = BuscaRabinKarp.RKSearch(padrao, textoInformado);
-            }
-
-
-            if (posicao >= 0)
+            else
             {
-                MessageBox.Show(this, $"Padrão encontrado na posição {posicao}.", "Resultado da busca", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            }
-            else {
-                MessageBox.Show(this, "Padrão não encontrado.", "Resultado da busca", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                ExecutarBusca(padrao, textoInformado, BuscaRabinKarp.RKSearch);
             }
         }
         // [R]
 
         private void ExecutarBusca(string padrao, string textoInformado, Func<string, string, int> algoritmoBusca)
         {
-            //array de numeros
-         // textoInformado.substring(posicao, padrao.Length-posicao);
-         // Precisamos
-
-            int posicao = 0;
-            while(posicao != -1)
+            int posicaoModificado = 0, posicao = 0;
+            String textoModificado = textoInformado; 
+            while(posicaoModificado != -1)
             {
-                posicao = algoritmoBusca(padrao, textoInformado.Substring(posicao, textoInformado.Length - (posicao + padrao.Length)));
-                int a = 1;
-                //pinta as parada
+                if(!textoModificado.Equals(""))
+                    posicaoModificado = algoritmoBusca(padrao, textoModificado);
+                else
+                    posicaoModificado = -1;
+                if (posicaoModificado != -1)
+                {
+                    posicao += posicaoModificado;
+                    textoModificado = textoModificado.Substring(posicaoModificado + padrao.Length, textoModificado.Length - (posicaoModificado + padrao.Length));
+                    texto.Select(posicao, padrao.Length);
+                    texto.SelectionBackColor = Color.Yellow;
+                    texto.SelectionStart = posicao + padrao.Length;
+                    texto.ScrollToCaret();
+                    posicao += padrao.Length;
+                }
             }
         }
-
-        // [F]
-        private void digitarTextoPesquisado()
-        {
-            
-           /* string input = .InputBox("Digite um peso maior ou igual a zero", "Editar peso", null);
-            if (input == "")
-            {
-                return "";
-            } else {
-                return "";
-            }*/
-        }
-        // [F]
 
         // [F]
         private void clickBoyerMoore(object sender, EventArgs e)
