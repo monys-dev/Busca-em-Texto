@@ -13,12 +13,15 @@ using System.IO;
 
 namespace BuscaTexto {
     public partial class Form1 : Form {
+        private String path = "";
+
         public Form1() {
             InitializeComponent();
         }
 
         private void clickNovo(object sender, EventArgs e) {
             texto.Text = "";
+            path = "";
         }
 
         private void clickSobre(object sender, EventArgs e) {
@@ -33,6 +36,62 @@ namespace BuscaTexto {
         private void clickAbrir(object sender, EventArgs e) {
             // Testando mudanças
             // Caixa de diálogo de abrir arquivo com filtro para extensão txt e rtf edição 
+            if (OPFile.ShowDialog() == DialogResult.OK)
+            {
+                abrirArquivo(OPFile.FileName);
+            }
+        }
+
+        public void abrirArquivo(string path)
+        {
+            this.path = path;
+            try
+            {
+                StreamReader s = new StreamReader(path);
+
+                texto.Text = s.ReadToEnd();
+                s.Close();
+            }
+            catch (Exception eX)
+            {
+                this.path = "";
+                MessageBox.Show("Erro ao abrir arquivo. " + eX.Message);
+            }
+        }
+
+        private void clickSalvar(object sender, EventArgs e)
+        {
+            if(!path.Equals(""))
+            {
+                salvarArquivo(path);
+            } else if (SVFile.ShowDialog() == DialogResult.OK)
+            {
+                salvarArquivo(SVFile.FileName);
+            }
+        }
+
+        private void clickSalvarComo(object sender, EventArgs e)
+        {
+            if (SVFile.ShowDialog() == DialogResult.OK)
+            {
+                salvarArquivo(SVFile.FileName);
+            }
+        }
+
+        private void salvarArquivo(string path)
+        {
+            this.path = path;
+            try
+            {
+                StreamWriter r = new StreamWriter(path);
+                r.WriteLine(texto.Text);
+                r.Close();
+            }
+            catch (IOException eX)
+            {
+                this.path = "";
+                MessageBox.Show("Erro ao gravar o arquivo. " + eX.Message);
+            }
         }
         // [F]
 
@@ -150,6 +209,18 @@ namespace BuscaTexto {
                 btnKMP.Checked = false;
                 btnRabinKarp.Checked = true;
             }
+        }
+        // [F]
+
+        // [F]
+        private void clickCaseSensitive(object sender, EventArgs e)
+        {
+            btnCaseSensitive.Checked = !btnCaseSensitive.Checked;
+        }
+
+        private void clickCoringa(object sender, EventArgs e)
+        {
+            btnCoringa.Checked = !btnCoringa.Checked;
         }
         // [F]
     }
