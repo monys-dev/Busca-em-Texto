@@ -22,6 +22,8 @@ namespace BuscaTexto {
             i = m - 1;
             j = m - 1;
             int totalTestes = 0;
+            if (n < m) // texto MENOR que o padrão
+                return Tuple.Create(-1, totalTestes);
             initSkip(p);
             while (j >= 0) {
                 while (t[i] != p[j]) {

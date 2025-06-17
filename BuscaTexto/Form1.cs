@@ -119,6 +119,14 @@ namespace BuscaTexto {
                     return;
             }
 
+            if (!btnCaseSensitive.Checked)
+            {
+                string upper_textoinformado = textoInformado.ToUpper();
+                string upper_padrao = padrao.ToUpper();
+                textoInformado = upper_textoinformado;
+                padrao = upper_padrao;
+            }
+
             if (btnBoyerMoore.Checked)
             {
                 ExecutarBusca(padrao, textoInformado, BuscaBoyerMoore.BMSearch);
@@ -173,10 +181,9 @@ namespace BuscaTexto {
             stopwatch.Stop();
             long elapsed_time = stopwatch.ElapsedMilliseconds;
             texto.SelectionBackColor = Color.White;
-            MessageBox.Show(this, $"Busca concluida!\n\n O padrão foi encontrado {vezes} vezes, nas posições:\n {posicoes.Substring(0, posicoes.Length-2)}." +
-                $"\nForam realizados {totalTestes} testes." +
+            MessageBox.Show(this, $"Busca concluida!\n\n O padrão foi encontrado {vezes} vezes. \n\nPosições:\n {posicoes.Substring(0, posicoes.Length-2)}" +
+                $"\n\nForam realizados {totalTestes} testes" +
                 $"{String.Format("\n\nTempo total de execução: {0:F4} seg", elapsed_time / 1000.0)}", "Resultado", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
         }
 
         // [F]
