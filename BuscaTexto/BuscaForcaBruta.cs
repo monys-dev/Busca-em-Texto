@@ -6,21 +6,23 @@ using System.Threading.Tasks;
 
 namespace BuscaTexto {
     class BuscaForcaBruta {
-        public static int forcaBruta(String p, String t) {
+        public static Tuple<int, int> forcaBruta(String p, String t) {
             int i, j, aux;
             int m = p.Length;
             int n = t.Length;
+            int totalTestes = 0;
             for (i = 0; i < n; i++) {
                 aux = i;
                 for (j = 0; j < m && aux < n; j++) {
+                    totalTestes++;
                     if (t[aux] != p[j])
                         break;
                     aux++;
                 }
                 if (j == m)
-                    return i;
+                    return Tuple.Create(i, totalTestes);
             }
-            return -1;
+            return Tuple.Create(-1, totalTestes);
         }
     }
 }

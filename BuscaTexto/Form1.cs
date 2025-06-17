@@ -10,6 +10,8 @@ using System.Windows.Forms;
 using Microsoft.VisualBasic;
 using System.Drawing.Drawing2D;
 using System.IO;
+using System.Threading;
+using System.Diagnostics;
 
 namespace BuscaTexto {
     public partial class Form1 : Form {
@@ -61,7 +63,6 @@ namespace BuscaTexto {
             if (btnBoyerMoore.Checked)
             {
                 ExecutarBusca(padrao, textoInformado, BuscaBoyerMoore.BMSearch);
-                
             }
             else if (btnForcaBruta.Checked)
             {
@@ -78,27 +79,45 @@ namespace BuscaTexto {
         }
         // [R]
 
-        private void ExecutarBusca(string padrao, string textoInformado, Func<string, string, int> algoritmoBusca)
+        private void ExecutarBusca(string padrao, string textoInformado, Func<string, string, Tuple<int, int>> algoritmoBusca)
         {
-            int posicaoModificado = 0, posicao = 0;
-            String textoModificado = textoInformado; 
+            var stopwatch = new Stopwatch();
+            stopwatch.Start();
+            int posicaoModificado = 0, posicao = 0, vezes = 0, totalTestes = 0;
+            string posicoes = "";
+            string textoModificado = textoInformado;
+
             while(posicaoModificado != -1)
             {
-                if(!textoModificado.Equals(""))
-                    posicaoModificado = algoritmoBusca(padrao, textoModificado);
+                if (!textoModificado.Equals(""))
+                {
+                    Tuple<int, int> resultado = algoritmoBusca(padrao, textoModificado);
+                    posicaoModificado = resultado.Item1;
+                    totalTestes += resultado.Item2;
+                }
                 else
                     posicaoModificado = -1;
                 if (posicaoModificado != -1)
                 {
                     posicao += posicaoModificado;
+                    posicoes += "(" + posicao.ToString() + $" -> {posicao + padrao.Length - 1})" + ", ";
                     textoModificado = textoModificado.Substring(posicaoModificado + padrao.Length, textoModificado.Length - (posicaoModificado + padrao.Length));
                     texto.Select(posicao, padrao.Length);
                     texto.SelectionBackColor = Color.Yellow;
+                    vezes++;
+                    Thread.Sleep(300);
                     texto.SelectionStart = posicao + padrao.Length;
                     texto.ScrollToCaret();
                     posicao += padrao.Length;
                 }
             }
+            stopwatch.Stop();
+            long elapsed_time = stopwatch.ElapsedMilliseconds;
+            texto.SelectionBackColor = Color.White;
+            MessageBox.Show(this, $"Busca concluida!\n\n O padrão foi encontrado {vezes} vezes, nas posições:\n {posicoes.Substring(0, posicoes.Length-2)}." +
+                $"\nForam realizados {totalTestes} testes." +
+                $"{String.Format("\n\nTempo total de execução: {0:F4} seg", elapsed_time / 1000.0)}", "Resultado", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
         }
 
         // [F]

@@ -20,21 +20,21 @@ namespace BuscaTexto {
             }
         }
 
-        public static int KMPSearch(String p, String t) {
+        public static Tuple<int, int> KMPSearch(String p, String t) {
             int i = 0, j = 0, m = p.Length, n = t.Length;
+            int totalTestes = 0;
             initNext(p);
             while (j < m && i < n) {
-                while (j >= 0 && t[i] != p[j]) {
-
+                while (j >= 0 && (totalTestes++ >=0 && t[i] != p[j])) {
                     j = next[j];
                 }
                 i++;
                 j++;
             }
             if (j == m)
-                return i - m;
+                return Tuple.Create(i - m, totalTestes);
             else
-                return -1;
+                return Tuple.Create(-1, totalTestes);
         }
     }
 }
