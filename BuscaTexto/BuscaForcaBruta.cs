@@ -15,7 +15,7 @@ namespace BuscaTexto {
                 aux = i;
                 for (j = 0; j < m && aux < n; j++) {
                     totalTestes++;
-                    if (t[aux] != p[j])
+                    if (p[j].Equals("?") || t[aux] != p[j])
                         break;
                     aux++;
                 }

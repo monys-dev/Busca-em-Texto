@@ -184,6 +184,14 @@ namespace BuscaTexto {
             MessageBox.Show(this, $"Busca concluida!\n\n O padrão foi encontrado {vezes} vezes. \n\nPosições:\n {posicoes.Substring(0, posicoes.Length-2)}" +
                 $"\n\nForam realizados {totalTestes} testes" +
                 $"{String.Format("\n\nTempo total de execução: {0:F4} seg", elapsed_time / 1000.0)}", "Resultado", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            refreshTela(texto);
+        }
+
+        private void refreshTela(RichTextBox rtx)
+        {
+            string textoEmTela = rtx.Text;
+            rtx.ResetText();
+            rtx.Text = textoEmTela;
         }
 
         // [F]
