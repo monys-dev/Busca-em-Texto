@@ -15,7 +15,7 @@ using System.Diagnostics;
 
 namespace BuscaTexto {
     public partial class Form1 : Form {
-        private String path = "";
+        private string path = "";
 
         public Form1() {
             InitializeComponent();
@@ -181,7 +181,12 @@ namespace BuscaTexto {
             stopwatch.Stop();
             long elapsed_time = stopwatch.ElapsedMilliseconds;
             texto.SelectionBackColor = Color.White;
-            MessageBox.Show(this, $"Busca concluida!\n\n O padrão foi encontrado {vezes} vezes. \n\nPosições:\n {posicoes.Substring(0, posicoes.Length-2)}" +
+            if(!posicoes.Equals(""))
+                MessageBox.Show(this, $"Busca concluida!\n\n O padrão foi encontrado {vezes} vezes. \n\nPosições:\n {posicoes.Substring(0, posicoes.Length-2)}" +
+                $"\n\nForam realizados {totalTestes} testes" +
+                $"{String.Format("\n\nTempo total de execução: {0:F4} seg", elapsed_time / 1000.0)}", "Resultado", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            else
+                MessageBox.Show(this, $"Busca concluida!\n\n O padrão não foi encontrado." +
                 $"\n\nForam realizados {totalTestes} testes" +
                 $"{String.Format("\n\nTempo total de execução: {0:F4} seg", elapsed_time / 1000.0)}", "Resultado", MessageBoxButtons.OK, MessageBoxIcon.Information);
             refreshTela(texto);
