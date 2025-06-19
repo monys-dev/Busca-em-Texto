@@ -121,10 +121,8 @@ namespace BuscaTexto {
 
             if (!btnCaseSensitive.Checked)
             {
-                string upper_textoinformado = textoInformado.ToUpper();
-                string upper_padrao = padrao.ToUpper();
-                textoInformado = upper_textoinformado;
-                padrao = upper_padrao;
+                textoInformado = textoInformado.ToLower();
+                padrao = padrao.ToLower();
             }
 
             if (btnBoyerMoore.Checked)
@@ -146,14 +144,82 @@ namespace BuscaTexto {
         }
         // [R]
 
+        private void clickSubstituir(object sender, EventArgs e)
+        {
+            string textoInformado = texto.Text; // "texto" = RichTextBox do Form1
+            string padrao = texto.SelectedText;
+            string substituido = "";
+
+            if (string.IsNullOrWhiteSpace(textoInformado))
+            {
+                MessageBox.Show(this, "O texto base está vazio", "Atenção!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            if (string.IsNullOrWhiteSpace(padrao)) // se a seleção estiver vazia
+            {
+                padrao = Interaction.InputBox("Digite o texto a ser pesquisado:", "Pesquisa", padrao); // solicita o padrão
+
+                if (string.IsNullOrWhiteSpace(padrao))
+                    return;
+                else
+                {
+                    substituido = Interaction.InputBox("Digite o texto a ser substituido:", "Substituição");
+
+                    if (string.IsNullOrWhiteSpace(substituido))
+                        return;
+                }
+            }
+            else
+            {
+                substituido = Interaction.InputBox("Digite o texto a ser substituido:", "Substituição");
+
+                if (string.IsNullOrWhiteSpace(substituido))
+                    return;
+            }
+
+            if (!btnCaseSensitive.Checked)
+            {
+                textoInformado = textoInformado.ToLower();
+                padrao = padrao.ToLower();
+                substituido = substituido.ToLower();
+            }
+
+            texto.Text = texto.Text.Replace(padrao, substituido);
+            refreshTela(texto);
+        }
+        private void clickSubstituir(string padrao, string textoInformado)
+        {
+            string substituido = "";
+
+            int result = ((int)Interaction.MsgBox("Deseja substituir?", MsgBoxStyle.YesNo | MsgBoxStyle.Question, "Substituição"));
+
+            if (result == 7)
+                return;
+
+            substituido = Interaction.InputBox("Digite o texto a ser substituido:", "Substituição");
+
+            if (string.IsNullOrWhiteSpace(substituido))
+                return;
+
+            if (!btnCaseSensitive.Checked)
+            {
+                textoInformado = textoInformado.ToLower();
+                padrao = padrao.ToLower();
+                substituido = substituido.ToLower();
+            }
+
+            texto.Text = texto.Text.Replace(padrao, substituido);
+            refreshTela(texto);
+        }
+
         private void ExecutarBusca(string padrao, string textoInformado, Func<string, string, Tuple<int, int>> algoritmoBusca)
         {
+            string line = "\n____________________________________________\n\n";
             var stopwatch = new Stopwatch();
-            stopwatch.Start();
             int posicaoModificado = 0, posicao = 0, vezes = 0, totalTestes = 0;
             string posicoes = "";
             string textoModificado = textoInformado;
 
+            stopwatch.Start();
             while(posicaoModificado != -1)
             {
                 if (!textoModificado.Equals(""))
@@ -181,15 +247,16 @@ namespace BuscaTexto {
             stopwatch.Stop();
             long elapsed_time = stopwatch.ElapsedMilliseconds;
             texto.SelectionBackColor = Color.White;
-            if(!posicoes.Equals(""))
-                MessageBox.Show(this, $"Busca concluida!\n\n O padrão foi encontrado {vezes} vezes. \n\nPosições:\n {posicoes.Substring(0, posicoes.Length-2)}" +
-                $"\n\nForam realizados {totalTestes} testes" +
-                $"{String.Format("\n\nTempo total de execução: {0:F4} seg", elapsed_time / 1000.0)}", "Resultado", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            if(posicao != 0)
+                MessageBox.Show(this, $"Padrão encontrado {vezes} vezes, nas posições:\n {posicoes.Substring(0, posicoes.Length-2)}" +
+                $"{line + totalTestes} testes, " +
+                $"{String.Format("execução em {0:F4} seg", elapsed_time / 1000.0)}", "Busca concluida", MessageBoxButtons.OK, MessageBoxIcon.Information);
             else
-                MessageBox.Show(this, $"Busca concluida!\n\n O padrão não foi encontrado." +
-                $"\n\nForam realizados {totalTestes} testes" +
-                $"{String.Format("\n\nTempo total de execução: {0:F4} seg", elapsed_time / 1000.0)}", "Resultado", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show(this, $"Padrão não foi encontrado." +
+                    $"{line + totalTestes} testes, " +
+                $"{String.Format("execução em {0:F4} seg", elapsed_time / 1000.0)}", "Busca concluida", MessageBoxButtons.OK, MessageBoxIcon.Information);
             refreshTela(texto);
+            clickSubstituir(padrao, textoInformado);
         }
 
         private void refreshTela(RichTextBox rtx)
@@ -197,6 +264,7 @@ namespace BuscaTexto {
             string textoEmTela = rtx.Text;
             rtx.ResetText();
             rtx.Text = textoEmTela;
+            rtx.SelectionStart = Text.Length;
         }
 
         // [F]
@@ -260,6 +328,22 @@ namespace BuscaTexto {
         private void clickCoringa(object sender, EventArgs e)
         {
             btnCoringa.Checked = !btnCoringa.Checked;
+            BuscaForcaBruta.setCoringa(btnCoringa.Checked);
+            if (btnCoringa.Checked)
+            {
+                btnBoyerMoore.Enabled = false;
+                btnKMP.Enabled = false;
+                btnRabinKarp.Enabled = false;
+                btnForcaBruta.Checked = true;
+                btnBoyerMoore.Checked = false;
+            }
+            else
+            {
+                btnBoyerMoore.Enabled = true;
+                btnForcaBruta.Enabled = true;
+                btnKMP.Enabled = true;
+                btnRabinKarp.Enabled = true;
+            }
         }
         // [F]
     }

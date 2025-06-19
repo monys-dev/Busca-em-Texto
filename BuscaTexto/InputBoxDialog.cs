@@ -78,5 +78,17 @@ namespace BuscaTexto
 
             return inputBox.InputValue;
         }
+
+        private void InitializeComponent()
+        {
+            this.SuspendLayout();
+            // 
+            // InputBoxDialog
+            // 
+            this.ClientSize = new System.Drawing.Size(282, 253);
+            this.Name = "InputBoxDialog";
+            this.ResumeLayout(false);
+
+        }
     }
 }

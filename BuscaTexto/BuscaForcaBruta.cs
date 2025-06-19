@@ -6,6 +6,12 @@ using System.Threading.Tasks;
 
 namespace BuscaTexto {
     class BuscaForcaBruta {
+
+        private static bool coringa = false;
+        public static void setCoringa(bool c) {
+            coringa = c;
+        }
+
         public static Tuple<int, int> forcaBruta(String p, String t) {
             int i, j, aux;
             int m = p.Length;
@@ -15,7 +21,7 @@ namespace BuscaTexto {
                 aux = i;
                 for (j = 0; j < m && aux < n; j++) {
                     totalTestes++;
-                    if (p[j].Equals("?") || t[aux] != p[j])
+                    if (t[aux] != p[j] && (coringa ? p[j] != '?' : true))
                         break;
                     aux++;
                 }
